@@ -1,16 +1,32 @@
 const demo = {};
+var centerX = 1500/2;
+var centerY = 1000/2;
+var purp, speed = 4;
 demo.state0 = function () {};
 demo.state0.prototype = {
-    preload: function () {},
+    preload: function () {
+        game.load.image('purp', 'assets/sprites/purpp.png')
+    },
     create: function () {
         game.stage.backgroundColor = '#0790b8';
         console.log('state0');
         addChangeStateEventListeners();
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        purp = game.add.sprite(centerX, centerY, 'purp');
+        purp.anchor.x = 0.5;
+        purp.anchor.y = 0.5;
     },
-    update: function () {}
+    update: function () {
+        if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT )){purp.x += speed;
+        }
+        else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){purp.x -= speed;  
+        }
+        if(game.input.keyboard.isDown(Phaser.Keyboard.UP )){purp.y -= speed;
+        }
+        else if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){purp.y += speed;  
+        }
+}
 };
-
 function changeState(i, stateNum){
     game.state.start('state'+ stateNum);
 }
